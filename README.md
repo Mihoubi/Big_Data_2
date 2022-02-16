@@ -8,5 +8,7 @@ Kafka 2+, ELK 7.9+,
 <br> You can used it in development evironment to test your applications, but it's not recommended to use it in production.
 
 <br> Just run `docker-compose up` and enjoy!
+<br>  To connect to a container :
+docker exec -it  --user root container-name  bash
 
-<br> You can find more explenation in [this article](https://itnext.io/creating-a-big-data-development-platform-using-docker-compose-892f7f4da738).
+
