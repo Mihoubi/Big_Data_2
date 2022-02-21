@@ -1,7 +1,10 @@
 from confluent_kafka import Producer
 
+
+# Install confluent_kafka
+# pip3 install confluent_kafka
 #1) Create Topic :
-# docker exec kafka kafka-topics : --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic topic1
+# docker exec kafka kafka-topics  --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic topic1
 # 2) Liste Topics :
 # docker exec -it kafka  kafka-topics  --list --zookeeper zookeeper:2181
 #3) Send Message Topic kafka :
@@ -10,6 +13,7 @@ from confluent_kafka import Producer
 #docker exec --interactive --tty kafka  kafka-console-consumer --bootstrap-server kafka:9092 --topic topic1 -- from-beginning
 
 p = Producer({'bootstrap.servers': 'localhost:9092'})
+
 
 def delivery_report(err, msg):
     """ Called once for each message produced to indicate delivery result.
