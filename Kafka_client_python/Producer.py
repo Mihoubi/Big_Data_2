@@ -1,8 +1,13 @@
 from confluent_kafka import Producer
 
-# Create Topic docker exec kafka kafka-topics : --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic users
-# Liste Topics docker exec -it kafka  kafka-topics  --list --zookeeper zookeeper:2181
-
+#1) Create Topic :
+# docker exec kafka kafka-topics : --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic topic1
+# 2) Liste Topics :
+# docker exec -it kafka  kafka-topics  --list --zookeeper zookeeper:2181
+#3) Send Message Topic kafka :
+#docker exec --interactive --tty kafka  kafka-console-producer --bootstrap-server kafka:9092 --topic topic1
+#) Read Message  from topic kafka :
+#docker exec --interactive --tty kafka  kafka-console-consumer --bootstrap-server kafka:9092 --topic topic1 -- from-beginning
 
 p = Producer({'bootstrap.servers': 'localhost:9092'})
 
