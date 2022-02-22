@@ -1,3 +1,4 @@
+#URL Vers l'API https://api.randomuser.me/0.6/?format=json&nat=us&results=100
 version: '3'
 services:
 
