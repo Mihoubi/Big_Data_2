@@ -51,7 +51,7 @@ services:
       - discovery.type=single-node
       - transport.host= 0.0.0.0
       - http.host= 0.0.0.0
-      - discovery.zen.minimum_master_nodes= 1
+      - discovery.zen.minimum_master_nodes=1
     ports:
       - "9200:9200"
       - "9300:9300"
