@@ -38,80 +38,49 @@ services:
       networks:
         net_kafka:
           ipv4_address: 172.28.1.21
-#  nifi:
-#    image: apache/nifi:1.13.0
-#    ports:
-#      - "8080:8080" # Unsecured HTTP Web Port
-#    environment:
-#      - NIFI_WEB_HTTP_PORT=8080
-#      - NIFI_CLUSTER_IS_NODE=true
-#      - NIFI_CLUSTER_NODE_PROTOCOL_PORT=8082
-#      - NIFI_ZK_CONNECT_STRING=zookeeper:2181
-#      - NIFI_ELECTION_MAX_WAIT=1 min
-#  nifi:
-#    image: apache/nifi:1.10.0
-#    container_name: nifi
-#    restart: unless-stopped
-#    network_mode: bridge
-#    ports:
-#      # HTTP
-#      - 8080:8080/tcp
-#      # HTTPS
-#      - 8443:8443/tcp
-#      # Remote Input Socket
-#      - 10000:10000/tcp
-#      # JVM Debugger
-#      - 8000:8000/tcp
-#      # Cluster Node Protocol
-#      #- 11443:11443/tcp
-#    volumes:
-#      # mkdir /var/lib/nifi && chown -R 1000:1000 /var/lib/nifi
-#      - /var/lib/nifi/database_repository:/opt/nifi/nifi-current/database_repository
-#      - /var/lib/nifi/flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
-#      - /var/lib/nifi/content_repository:/opt/nifi/nifi-current/content_repository
-#      - /var/lib/nifi/provenance_repository:/opt/nifi/nifi-current/provenance_repository
-#      - /var/lib/nifi/state:/opt/nifi/nifi-current/state
-#      - /var/lib/nifi/logs:/opt/nifi/nifi-current/logs
-#
-#      # A custom nifi.properties file can be mounted as follows.
-#      #- /var/lib/nifi/conf/nifi.properties:/opt/nifi/nifi-current/conf/nifi.properties:ro
-#
-#    environment:
-#
-#      ########## JVM ##########
-#
-#      # -Xms
-#      #   The initial JVM heap size.
-#      #NIFI_JVM_HEAP_INIT: 512m
-#
-#      # -Xmx
-#      #   The maximum JVM heap size.
-#      #NIFI_JVM_HEAP_MAX: 512m
-#
-#      # -Xdebug
-#      #   The JVM Debugger can be enabled by setting this environment variable to any value.
-#      #NIFI_JVM_DEBUGGER: ''
-#
-#
-#
-#      ########## Web ##########
-#
-#      # nifi.web.http.host
-#      NIFI_WEB_HTTP_HOST: '0.0.0.0'
-#
-#      # nifi.web.http.port
-#      #   HTTP Port
-#      NIFI_WEB_HTTP_PORT: 8080
-#
-#    networks:
-#      net_kafka:
-#        ipv4_address: 172.28.1.22
+  elasticsearch:
+    image: elasticsearch:7.9.1
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - action.destructive_requires_name=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - discovery.type=single-node
+      - transport.host= 0.0.0.0
+      - http.host= 0.0.0.0
+      - discovery.zen.minimum_master_nodes= 1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      net_pet:
+        ipv4_address: 172.28.1.22
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
 
-# docker run --name nifi  -p 8443:8443 -d apache/nifi:latest
-# docker exec -it  --user root nifi bash
-# cd /opt/nifi/nifi-current/logs
-# pour récuperer le mot de passe et le user name
-# vi oui bien cat nifi-app.log
+  kibana:
+    image: kibana:7.9.1
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      I18N_LOCALE: fr-FR
+    restart: always
+    ports:
+      - "5601:5601"
+    networks:
+      net_pet:
+        ipv4_address: 172.28.1.23
+    depends_on:
+      - elasticsearch
 
 
 networks:
