@@ -1,0 +1,29 @@
+
+0) Lancement de NIFI :
+
+# docker run --name nifi  -p 8443:8443 -d apache/nifi:latest
+# docker exec -it  --user root nifi bash
+# cd /opt/nifi/nifi-current/logs
+# pour récuperer le mot de passe et le user name
+# vi oui bien cat nifi-app.log
+# si jamais le vi n'est pas disponible il faut l'installer : apt-get install vim !!
+
+1) Lancement du Docker Kafka
+#) Aller dans le répertoir de Kafaka et lancer le docker-compose
+#) avec =>  docker-compose up
+#) Create Topic :
+# docker exec kafka kafka-topics  --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic topic1
+#  Liste Topics :
+# docker exec -it kafka  kafka-topics  --list --zookeeper zookeeper:2181
+#3) Send Message Topic kafka :
+#docker exec --interactive --tty kafka  kafka-console-producer --bootstrap-server kafka:9092 --topic topic1
+#) Read Message  from topic kafka :
+#docker exec --interactive --tty kafka  kafka-console-consumer --bootstrap-server kafka:9092 --topic topic1 -- from-beginning
+#) pour rentrer dans un docker en tant que Admin :
+docker exec -it  --user root nom_docker bash
+
+
+2)  Lancement du Docker ELK :
+# aller dans le répertoir de ElasticSearch
+# lancer le Docker : docker-compose up
+

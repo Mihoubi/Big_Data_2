@@ -2,7 +2,7 @@ from confluent_kafka import Producer
 
 
 # Install confluent_kafka
-# pip3 install confluent_kafka
+# pip3 install confluent_kafka==0.11.4
 #1) Create Topic :
 # docker exec kafka kafka-topics  --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic topic1
 # 2) Liste Topics :
