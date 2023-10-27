@@ -1,0 +1,43 @@
+# to deploy hadoop cluster with 1 namenode and 1 datanode
+Go to https://github.com/Mihoubi/Big_Data_2 ( here we are !)
+
+0) Check that git is installed on your machine :
+to do that go to terminal or commande line and check :
+git version => if git is installed you should have git version 2.38.1
+if git is not installed you should install it => https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+1) Get the Big_Data_2 project locally :
+in your terminal (command line)
+create a directory ( example mkdire M2BD)
+git clone https://github.com/Mihoubi/Big_Data_2.git
+
+2) launch docker ( docker is already installed in your machine !)
+2) launch the docker compose to launch the tow instances of docker ( datanode and the namenode)
+
+docker-compose up -d
+
+3) Check if all is up
+
+mohamedmihoubi@macbook-pro-de-mohamed:~/big_data_projects/Big_Data_2 (master)$ docker ps
+CONTAINER ID   IMAGE                                             COMMAND                  CREATED          STATUS                    PORTS                      NAMES
+cb4da2134fe5   bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8   "/entrypoint.sh /run…"   50 minutes ago   Up 14 minutes (healthy)   0.0.0.0:50075->50075/tcp   datanode
+1d86f95de80a   bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8   "/entrypoint.sh /run…"   50 minutes ago   Up 14 minutes (healthy)   0.0.0.0:50070->50070/tcp   namenode
+
+check if the interface is up => http://0.0.0.0:50070/dfshealth.html#tab-overview
+
+4) enter into the datanode and namenode docker instance :
+
+docker exec -it  --user root datanode bash
+
+5) create directory :
+
+ hadoop fs -mkdir /test
+
+6) explore the hdfs files :
+
+hadoop fs -ls /
+
+6) create new repo :
+
+hadoop fs -mkdir  /mohamed
+
