@@ -29,8 +29,11 @@ check if the interface is up => http://0.0.0.0:50070/dfshealth.html#tab-overview
 
 docker exec -it  --user root datanode bash
 
+5) create directory :
 
-5) explore the hdfs files :
+ hadoop fs -mkdir /test
+
+6) explore the hdfs files :
 
 hadoop fs -ls /
 
