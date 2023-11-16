@@ -79,7 +79,7 @@ services:
     image: mysql:5.7
     container_name: database
     ports:
-      - "33061:3306"
+      - "3306:3306"
     command: --init-file /data/application/init.sql
     volumes:
       - /tmp/mysql/data:/var/lib/mysql
@@ -106,10 +106,10 @@ services:
     volumes:
       - ./hue-overrides.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on:
-      - "database"
+      - database
     networks:
       net_pet:
-        ipv4_address: 172.28.1.13
+        ipv4_address: 172.28.1.15
 
 
 networks:
