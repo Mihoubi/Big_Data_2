@@ -1,0 +1,69 @@
+# to deploy Big Data 2 Git Repo
+Go to https://github.com/Mihoubi/Big_Data_2 ( here we are !)
+
+0) Check that git is installed on your machine :
+to do that go to terminal or commande line and check :
+git version => if git is installed you should have git version 2.38.1
+if git is not installed you should install it => https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+1) Get the Big_Data_2 project locally :
+in your terminal (command line)
+create a directory ( example mkdire M2BD)
+git clone https://github.com/Mihoubi/Big_Data_2.git
+
+2) go to Hive directory
+cd Hive
+2) launch docker ( docker is already installed in your machine !)
+
+docker-compose up --force-recreate
+
+3) Check if all is up
+
+mohamedmihoubi@macbook-pro-de-mohamed:~/big_data_projects/Big_Data_2 (master)$ docker ps
+CONTAINER ID   IMAGE                                             COMMAND                  CREATED         STATUS                            PORTS                                          NAMES
+007d6aca6dd0   bde2020/hive:2.3.2-postgresql-metastore           "entrypoint.sh /bin/…"   9 seconds ago   Up 4 seconds                      0.0.0.0:10000->10000/tcp, 10002/tcp            hive-server
+dc54f2e7cc1d   bde2020/hive:2.3.2-postgresql-metastore           "entrypoint.sh /opt/…"   9 seconds ago   Up 5 seconds                      10000/tcp, 0.0.0.0:9083->9083/tcp, 10002/tcp   hive-metastore
+d284c2e4a8e5   bde2020/hive-metastore-postgresql:2.3.0           "/docker-entrypoint.…"   9 seconds ago   Up 6 seconds                      5432/tcp                                       hive-metastore-postgresql
+e871c73c3eb2   bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8   "/entrypoint.sh /run…"   9 seconds ago   Up 6 seconds (health: starting)   0.0.0.0:50075->50075/tcp                       datanode
+79ff9f70a5f1   gethue/hue:20191107-135001                        "./startup.sh"           9 seconds ago   Up 6 seconds                      0.0.0.0:8888->8888/tcp                         hue
+472a930b33e1   mysql:5.7                                         "docker-entrypoint.s…"   9 seconds ago   Up 7 seconds                      0.0.0.0:3306->3306/tcp, 33060/tcp              database
+48cf96427ce7   bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8   "/entrypoint.sh /run…"   9 seconds ago   Up 7 seconds (health: starting)   0.0.0.0:50070->50070/tcp                       namenode
+
+
+check if the Hue interface is up => http://0.0.0.0:8888/hue
+
+4) Go to the interface Hue :
+
+Create Table
+
+CREATE TABLE zipcodes(
+RecordNumber int,
+Country string,
+City string,
+Zipcode int)
+PARTITIONED BY(state string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+5) create directory :
+
+
+6) copy file from local to docker
+docker cp ./bank/zipcodes.csv datanode:home
+
+7) Create Directory data
+docker exec -i datanode bash -c 'hdfs dfs -mkdir /data'
+
+8) copy file from repo inside docker to hdfs
+docker exec -i datanode bash -c 'hdfs dfs -put /home/zipcodes.csv /data/'
+
+9) go to the Hive-server docker and launch hive commande
+docker exec -it hive-server /bin/bash
+
+8) Launch hivey
+hive
+
+10)
+LOAD DATA INPATH '/data/zipcodes.csv' INTO TABLE zipcodes;
+
+11) select * from table
