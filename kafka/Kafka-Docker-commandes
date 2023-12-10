@@ -1,0 +1,27 @@
+# to deploy Big Data 2 Git Repo
+Go to https://github.com/Mihoubi/Big_Data_2 ( here we are !)
+
+0) Check that git is installed on your machine :
+to do that go to terminal or commande line and check :
+git version => if git is installed you should have git version 2.38.1
+if git is not installed you should install it => https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+1) Get the Big_Data_2 project locally :
+in your terminal (command line)
+create a directory ( example mkdire M2BD)
+git clone https://github.com/Mihoubi/Big_Data_2.git
+
+2) go to Kafka directory
+cd kafka
+2) launch docker ( docker is already installed in your machine !)
+
+docker-compose up --force-recreate
+
+3) Check if all is up
+
+mohamedmihoubi@macbook-pro-de-mohamed:~/big_data_projects/Big_Data_2 (master)$ docker ps
+CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS          PORTS                                            NAMES
+fec9e7f33404   confluentinc/cp-kafka:6.2.0       "/etc/confluent/dock…"   40 seconds ago   Up 38 seconds   0.0.0.0:9092->9092/tcp, 0.0.0.0:9101->9101/tcp   kafka
+d54be2c196b1   confluentinc/cp-zookeeper:6.2.0   "/etc/confluent/dock…"   40 seconds ago   Up 38 seconds   2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp       zookeeper
+
+

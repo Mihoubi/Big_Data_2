@@ -33,8 +33,6 @@ services:
   kibana:
     image: kibana:7.9.1
     container_name: kibana
-    ports:
-      - "5601:5601"
     environment:
       I18N_LOCALE: fr-FR
     restart: always

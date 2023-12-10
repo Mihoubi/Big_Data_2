@@ -2,8 +2,8 @@ from confluent_kafka import Consumer
 
 
 c = Consumer({
-    'bootstrap.servers': 'localhost:9092',
-    'group.id': 'mygroup',
+    'bootstrap.servers': 'localhost:9092, localhost:9093, localhost:9094',
+    'group.id': 'mygroup1',
     'auto.offset.reset': 'earliest'
 })
 

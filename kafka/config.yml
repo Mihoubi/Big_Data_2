@@ -1,0 +1,28 @@
+kafka:
+  clusters:
+    -
+      name: local
+      bootstrapServers: kafka:9092
+      schemaRegistry: http://localhost:8085
+      schemaRegistryAuth:
+        username: username
+        password: password
+      #     schemaNameTemplate: "%s-value"
+      metrics:
+        port: 9997
+        type: JMX
+
+
+
+        services:
+          kafka-ui:
+            image: provectuslabs/kafka-ui
+            container_name: kafka-ui
+            ports:
+              - "8080:8080"
+            restart: always
+            environment:
+              - KAFKA_CLUSTERS_0_NAME=local
+              - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=0.0.0.0:9092
+              - KAFKA_CLUSTERS_0_ZOOKEEPER="0.0.0.0:2181"
+              - KAFKA_CLUSTERS_0_READONLY=true
