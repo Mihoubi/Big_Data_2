@@ -25,7 +25,7 @@ def delivery_report(err, msg):
         print('Message delivery failed: {}'.format(err))
     else:
         print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
-some_data_source = {"Phrase 1", "Phrase 2"}
+some_data_source = {"Phrase 3", "Phrase 4"}
 
 for data in some_data_source:
     # Trigger any available delivery report callbacks from previous produce() calls

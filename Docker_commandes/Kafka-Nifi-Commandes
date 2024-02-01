@@ -3,6 +3,7 @@
 
 # docker run --name nifi  -p 8443:8443 -d apache/nifi:latest
 # docker exec -it  --user root nifi bash
+
 # cd /opt/nifi/nifi-current/logs
 # pour récuperer le mot de passe et le user name
 # vi oui bien cat nifi-app.log
@@ -21,6 +22,7 @@
 #docker exec --interactive --tty kafka  kafka-console-consumer --bootstrap-server kafka:9092 --topic topic1 -- from-beginning
 #) pour rentrer dans un docker en tant que Admin :
 docker exec -it  --user root nom_docker bash
+
 
 
 2)  Lancement du Docker ELK :
