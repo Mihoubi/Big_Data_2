@@ -59,35 +59,6 @@ services:
       net_kafka_nifi:
         ipv4_address: 172.21.0.11
 
-  nifi:
-    image: apache/nifi:1.19.0
-    hostname: nifi
-    ports:
-      - 9443:9443
-    environment:
-      - NIFI_WEB_HTTPS_PORT=9443
-    networks:
-      net_kafka_nifi:
-        ipv4_address: 172.21.0.8
-#  nifi:
-#    hostname: mynifi
-#    image: apache/nifi:1.19.0
-#    restart: on-failure
-#    ports:
-#      - "8443:8443" # Unsecured HTTP Web Port
-#      - "8088:8080"
-#    environment:
-#       NIFI_WEB_HTTPS_PORT: 8083
-#       NIFI_WEB_HTTP_HOST: 0.0.0.0
-##      - NIFI_CLUSTER_IS_NODE=false
-#       SINGLE_USER_CREDENTIALS_USERNAME: "admin"
-#       SINGLE_USER_CREDENTIALS_PASSWORD: "ctsBtRBKHRAx69EqUghvvgEvjnaLjFEB"
-# #     - NIFI_CLUSTER_NODE_PROTOCOL_PORT=8082
-# #     - NIFI_ZK_CONNECT_STRING=zookeeper:2181
-# #     - NIFI_ELECTION_MAX_WAIT=1 min
-#    networks:
-#      net_kafka_nifi:
-#        ipv4_address: 172.21.0.7
 
 networks:
   net_kafka_nifi:

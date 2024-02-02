@@ -7,6 +7,8 @@
 
 docker network connect net_kafka_nifi nifi
 
+ docker logs nifi | grep Generated
+
 # cd /opt/nifi/nifi-current/logs
 # pour récuperer le mot de passe et le user name
 # vi oui bien cat nifi-app.log
