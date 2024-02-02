@@ -2,7 +2,10 @@
 0) Lancement de NIFI :
 
 # docker run --name nifi  -p 8443:8443 -d apache/nifi:latest
-# docker exec -it  --user root nifi bash
+# docker exec -it  --user root kafka-nifi-1 bash
+
+
+docker network connect net_kafka_nifi nifi
 
 # cd /opt/nifi/nifi-current/logs
 # pour récuperer le mot de passe et le user name
