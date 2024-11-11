@@ -35,6 +35,10 @@ check if the Hue interface is up => http://0.0.0.0:8888/hue
 4) Go to the interface Hue :
 
 Create Table
+CREATE TABLE student (id INT, name STRING)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;
+
 
 CREATE TABLE zipcodes(
 RecordNumber int,
